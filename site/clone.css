@@ -41,3 +41,7 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
   .rc-exp-head, .rc-exp-sub { flex-direction: column; gap: 4px; }
   .rc-exp-dates, .rc-exp-place { white-space: normal; }
 }
+/* Project cards: 4:3 images. On desktop the card widens (less left indent) so the height stays the same
+   as the original 5:4 card: width = (W - 120px) * 16/15  ->  padding-left = 128px - W/15 */
+#projects .framer-ouriok { aspect-ratio: 4 / 3 !important; }
+@media (min-width: 1440px) { #projects .framer-ahh7u { padding-left: calc(128px - 6.6667%) !important; } }
