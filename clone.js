@@ -31,6 +31,18 @@
   }
   // hover-only decorations, e.g. "( Projects )" brackets in the nav
   document.querySelectorAll('a > [style*="opacity:0;transform:none"]').forEach(function (el) { el.classList.add('rc-hover-swap'); el.style.willChange = 'transform'; });
+  // Mobile menu: hamburger opens a full-height nav (observed on the reference), lines turn into a cross
+  document.querySelectorAll('nav [data-framer-name^="Hamburger"]').forEach(function (btn) {
+    var nav = btn.closest('nav');
+    btn.setAttribute('role', 'button'); btn.setAttribute('tabindex', '0'); btn.setAttribute('aria-label', 'Open menu');
+    var toggle = function () {
+      var open = nav.classList.toggle('rc-menu-open');
+      btn.setAttribute('aria-expanded', open); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (window.__lenis) open ? window.__lenis.stop() : window.__lenis.start();
+    };
+    btn.addEventListener('click', toggle);
+    btn.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
   // Lenis smooth scrolling, as on the original site (anchor links included)
   if (!reduce && window.Lenis) {
     var lenis = new window.Lenis({ autoRaf: true, anchors: true, autoToggle: true });
