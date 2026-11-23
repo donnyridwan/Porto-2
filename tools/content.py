@@ -230,3 +230,65 @@ for old, (new, title, cat, client, year, industry, result, desc) in PROJECTS.ite
     open(dst, 'w', encoding='utf-8').write(str(soup))
     apply(dst, depth=1)
 print('content applied')
+
+# ---- About page: work experience list (CV "Experience" + "Education") ----------
+EXPERIENCE = [
+    ('Gandaria Studio', 'Senior Product Designer (Part-time)', 'Semarang, Indonesia', 'Feb 2024 – Present', [
+        'Led an end-to-end UX redesign of a SaaS platform, lifting user retention by 20% and task completion by 15%.',
+        "Raised an e-commerce platform's conversion rate by 25% through CRO-focused UX changes.",
+        'Built a scalable Figma design system and shipped 5 WordPress/Shopify websites from Figma to launch.']),
+    ('Upwork', 'Freelance UI/UX & Website Designer', 'Remote', 'May 2024 – Present', [
+        'Top Rated with a 100% Job Success Score — 60+ contracts and 1,200+ hours completed.',
+        'Designed conversion-focused landing pages and marketing websites for e-commerce and DTC brands.',
+        'Ran UX and CRO audits, turning findings on hierarchy, messaging and CTAs into design fixes.']),
+    ('Tappifyd', 'UI/UX Designer (Part-time)', 'Jeddah, Saudi Arabia', 'Dec 2024 – Jun 2026', [
+        'Led product design of an event participant-tracking app for an F1-related event, later used during Hajj 2025.',
+        'Designed a food-ordering app for the Middle East market, used by several restaurants in the UAE.',
+        'Redesigned an MVP into a multi-sector B2B platform for hospitals, hotels and other industries.']),
+    ('Aksantara Digital', 'UI/UX Designer (Internship)', 'Semarang, Indonesia', 'Oct 2023 – Mar 2024', [
+        'Published a Dribbble shot that reached 20,000 impressions and 150 likes, drawing international inquiries.',
+        'Designed mobile and web interfaces for 5+ client pitch decks.',
+        'Designed UI/UX for a fashion marketplace with 100+ listings, improving product discovery.']),
+    ('Tupai Tech', 'UI Designer (Internship)', 'Surakarta, Indonesia', 'Jul 2022 – Sep 2022', [
+        'Redesigned an ERP dashboard website, driving +30% engagement, +25% inquiries and +15% conversions.',
+        'Applied CRO and WCAG accessibility practices, improving UX by 25%.']),
+]
+EDUCATION = ('Diponegoro University', 'Bachelor of Engineering, Computer Engineering', 'GPA 3.79 / 4.00', 'Aug 2020 – Apr 2024')
+APPEAR = 'will-change:transform;opacity:0;transform:translateY(10px)'
+
+
+def esc(t):
+    return t.replace('&', '&amp;').replace('<', '&lt;')
+
+
+def exp_card(company, role, place, dates, bullets=(), tag=None):
+    items = ''.join(f'<li>{esc(b)}</li>' for b in bullets)
+    return (f'<article class="rc-exp-card" style="{APPEAR}">'
+            f'<div class="rc-exp-head"><h3 class="rc-exp-company">{esc(company)}</h3><p class="rc-exp-dates">{esc(dates)}</p></div>'
+            f'<div class="rc-exp-sub"><p class="rc-exp-role">{esc(role)}</p><p class="rc-exp-place">{esc(place)}</p></div>'
+            + (f'<ul class="rc-exp-points">{items}</ul>' if items else '')
+            + (f'<p class="rc-exp-tag">{esc(tag)}</p>' if tag else '') + '</article>')
+
+
+def add_experience(path):
+    soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'html.parser')
+    if soup.find(id='experience'):
+        return
+    about = soup.find('section', id='about')
+    sec = BeautifulSoup(str(about), 'html.parser').section
+    sec['id'] = 'experience'; sec['data-framer-name'] = 'Experience'
+    sec.find('p', string='About Me').string = 'Career'
+    sec.find('h2').string = 'Work Experience'
+    sec.find('p', class_='framer-styles-preset-1qrdxb7').string = (
+        '4+ years designing SaaS, fintech, e-commerce and B2B products across studio, freelance and international remote roles.')
+    wrap = sec.find('div', class_='framer-1qmbych')
+    wrap.clear(); wrap['class'] = wrap.get('class', []) + ['rc-exp-list']; wrap['data-framer-name'] = 'Experience List'
+    cards = ''.join(exp_card(*e) for e in EXPERIENCE)
+    cards += '<p class="rc-exp-label">Education</p>' + exp_card(EDUCATION[0], EDUCATION[1], 'Semarang, Indonesia', EDUCATION[3], tag=EDUCATION[2])
+    wrap.append(BeautifulSoup(cards, 'html.parser'))
+    about.insert_after(sec)
+    open(path, 'w', encoding='utf-8').write(str(soup))
+
+
+add_experience(os.path.join(SITE, 'about.html'))
+print('experience added')
