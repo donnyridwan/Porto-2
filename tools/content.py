@@ -12,6 +12,7 @@ SITE_URL = 'https://donnyridwan.github.io/Porto-2/'
 EMAIL = 'halo@donnyridwan.my.id'
 LINKEDIN = 'https://www.linkedin.com/in/donnyrs/'
 NAME = 'Donny Ridwan'
+LOGO = 'Donny Rs'   # nav logo text
 TITLE = 'Donny Ridwan Setiawan — Senior UI/UX & Product Designer'
 DESCRIPTION = ('Senior UI/UX and Product Designer with 4+ years of experience helping SaaS, fintech and '
                'e-commerce products convert. Research, prototyping, design systems and launch on WordPress or Shopify.')
@@ -147,6 +148,11 @@ def apply(path, extra_pairs=(), depth=0):
     soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'html.parser')
     up = '../' * depth
     replace_text(soup, list(extra_pairs) + TEXT)
+    # nav logo (desktop + phone nav)
+    for nav in soup.find_all('nav'):
+        for a in nav.find_all('a', attrs={'data-framer-name': 'Logo'}):
+            for n in a.find_all(string=lambda x: x and x.strip() in (NAME, 'Godere®')):
+                n.replace_with(LOGO)
     # head
     page = os.path.basename(path)
     page_url = SITE_URL + ('' if page == 'index.html' else ('projects/' if depth else '') + page)
