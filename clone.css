@@ -26,3 +26,18 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
 .rc-monogram { display: flex; align-items: center; justify-content: center; background: #111; }
 .rc-monogram span { font: 600 18px/1 "Inter", "Inter Placeholder", sans-serif; color: #fff; }
 .rc-hidden { display: none !important; }
+/* About: work experience list */
+.rc-exp-list { align-items: stretch !important; gap: 6px; }
+.rc-exp-card { background: #fff; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box; }
+.rc-exp-head, .rc-exp-sub { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 0; }
+.rc-exp-company { margin: 0; font: 600 22.4px/1.2 "Manrope", "Manrope Placeholder", sans-serif; letter-spacing: -0.02em; color: #000; }
+.rc-exp-dates, .rc-exp-place, .rc-exp-tag { margin: 0; font: 500 14px/1.2 "Inter", "Inter Placeholder", sans-serif; color: #8a8a8a; white-space: nowrap; }
+.rc-exp-role { margin: 0; font: 500 14px/1.4 "Inter", "Inter Placeholder", sans-serif; color: #000; }
+.rc-exp-points { margin: 10px 0 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 6px; }
+.rc-exp-points li { font: 400 14px/1.5 "Inter", "Inter Placeholder", sans-serif; color: #555; }
+.rc-exp-tag { margin-top: 4px; color: #000; }
+.rc-exp-label { margin: 24px 0 4px; font: 500 14px/1.2 "Inter", "Inter Placeholder", sans-serif; color: #8a8a8a; }
+@media (max-width: 939.98px) {
+  .rc-exp-head, .rc-exp-sub { flex-direction: column; gap: 4px; }
+  .rc-exp-dates, .rc-exp-place { white-space: normal; }
+}
