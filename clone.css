@@ -60,7 +60,11 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
   .framer-yushdo .framer-zx03sv,
   .framer-yushdo .framer-1qmbych,
   .framer-yushdo .framer-1ib2k8o,
-  .framer-yushdo .framer-1tcahwi { padding-left: 140px !important; }
+  .framer-yushdo .framer-1tcahwi,
+  .framer-13hkk6o { padding-left: 140px !important; }  /* last one: project page image column */
 }
-/* Narrower white left panel on tablet/desktop (was up to 600px); fits the 400px hero and the nav */
-@media (min-width: 940px) { .framer-11rs5vm { max-width: 520px !important; } }
+/* Narrower white left panel on tablet/desktop (was up to 600px); fits the 400px hero and the nav.
+   The footer has its own left column, kept the same width so the white/grey edge lines up. */
+@media (min-width: 940px) { .framer-11rs5vm, .framer-1fnmycn, footer .framer-rq7u19 { max-width: 520px !important; } }
+/* Phones: footer uses the same 30px side padding as the page content */
+@media (max-width: 939.98px) { footer .framer-riu1uj, footer .framer-b2fpsd { padding-left: 30px !important; padding-right: 30px !important; } }
