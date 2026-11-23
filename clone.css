@@ -45,3 +45,12 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
    as the original 5:4 card: width = (W - 120px) * 16/15  ->  padding-left = 128px - W/15 */
 #projects .framer-ouriok { aspect-ratio: 4 / 3 !important; }
 @media (min-width: 1440px) { #projects .framer-ahh7u { padding-left: calc(128px - 6.6667%) !important; } }
+/* Project cards: whole card (image + caption) is 4:3 on tablet/desktop; phones keep the 4:3 image
+   because the two-line caption would squeeze the image to a thin strip */
+@media (min-width: 940px) {
+  #projects .framer-YSbPJ { aspect-ratio: 4 / 3; height: auto !important; display: flex !important; flex-direction: column !important; }
+  #projects .framer-YSbPJ > :first-child { flex: 1 1 0 !important; min-height: 0; height: auto !important; }
+  #projects .framer-YSbPJ > :first-child [data-framer-name="Hoverable"] { height: 100% !important; }
+  #projects .framer-YSbPJ [data-framer-name="Image Wrapper"] { aspect-ratio: auto !important; height: 100% !important; }
+  #projects .framer-YSbPJ > :not(:first-child) { flex: none !important; }
+}
