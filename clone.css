@@ -62,3 +62,5 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
   .framer-yushdo .framer-1ib2k8o,
   .framer-yushdo .framer-1tcahwi { padding-left: 140px !important; }
 }
+/* Narrower white left panel on tablet/desktop (was up to 600px); fits the 400px hero and the nav */
+@media (min-width: 940px) { .framer-11rs5vm { max-width: 520px !important; } }
