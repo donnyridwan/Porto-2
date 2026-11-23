@@ -6,3 +6,17 @@
 a:hover > .rc-hover-swap { animation: rc-show .1s ease-out, rc-pulse .8s ease-in-out .1s infinite; }
 a:hover > .rc-hover-swap ~ .rc-hover-swap { animation-delay: .03s; }
 @media (prefers-reduced-motion: reduce) { .rc-appear { transition: none !important; } a:hover > .rc-hover-swap { animation: none; opacity: 1 !important; } }
+
+/* ---- Customisations (see tools/customize.py) ---- */
+/* Hero headline sits a little lower now that the hero images are removed */
+.rc-hero > .framer-1ofkmq3 { margin-top: 48px; }
+@media (max-width: 939.98px) { .rc-hero > .framer-1ofkmq3 { margin-top: 24px; } }
+/* Short generated pages (e.g. contact.html): grey right column fills the viewport on desktop/tablet */
+@media (min-width: 940px) { .framer-o1aozp { min-height: 100vh; } }
+/* Mobile menu (toggled by clone.js) */
+nav [data-framer-name^="Hamburger"] { cursor: pointer; }
+nav.framer-12vzqrw { transition: height .4s cubic-bezier(.44,0,.56,1); }
+nav.rc-menu-open { height: 100vh !important; height: 100dvh !important; }
+nav [data-framer-name^="Hamburger"] > div { transition: transform .3s ease, top .3s ease, bottom .3s ease; }
+nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-efdxxd { top: 14px !important; bottom: auto !important; transform: rotate(45deg) !important; }
+nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !important; bottom: auto !important; transform: rotate(-45deg) !important; }

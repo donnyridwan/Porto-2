@@ -17,11 +17,26 @@ node tools/serve.mjs site 3000      # clean URLs, like the original (/projects/v
 | --- | --- |
 | `site/` | The clone: 6 pages, 170 local assets (fonts + AVIF/WebP images), `clone.css`, `clone.js`, `vendor/lenis` |
 | `ref/` | Captured server-rendered HTML of the reference |
+| `tools/customize.py` | Applies the customisations above |
 | `tools/build.py` | Rebuilds `site/` from `ref/`: strips Framer runtime scripts and badge, localises every asset (manifest with SHA-256 in `site/assets/manifest.json`) |
 | `tools/capture-playwright.cjs` | Playwright adapter writing Replica's `captures.json` evidence contract (Una CLI was not available) |
 | `tools/checks-playwright.cjs` | Behaviour checks run against both sites, writing `checks.json` receipts |
 | `project.json` | Replica scope: 6 routes × 390/1024/1440 viewports, 4 required checks |
 | `runs/run-007/` | Final evidence: screenshots, diffs, `comparison.json`, `report.md` |
+
+## Customisations (on top of the reconstruction)
+
+`tools/customize.py` (run after `tools/build.py`; idempotent, keeps the untouched home page in `tools/index.pristine.html`):
+
+* Home hero images removed; headline sits a little lower (CSS in `site/clone.css`, "Customisations").
+* "Trusted by Leading Brands" moved below "Selected Work".
+* Nav links open real pages instead of scrolling: `projects.html`, `services.html`, `about.html`, `contact.html`
+  (generated from the home layout with their own headline and sections). Also used by project pages and "Let's Talk".
+* Mobile hamburger menu works (full-height menu, cross icon), matching the original's behaviour.
+
+## Publish
+
+GitHub Pages serves the `gh-pages` branch, which holds a copy of `site/`: https://donnyridwan.github.io/Porto-2/
 
 ## What replaces the Framer runtime
 
