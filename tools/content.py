@@ -148,6 +148,14 @@ def apply(path, extra_pairs=(), depth=0):
     soup = BeautifulSoup(open(path, encoding='utf-8').read(), 'html.parser')
     up = '../' * depth
     replace_text(soup, list(extra_pairs) + TEXT)
+    # cache-busting: version our CSS/JS by content hash so browsers never keep a stale copy
+    import hashlib, re as _re
+    for tag, attr in (('link', 'href'), ('script', 'src')):
+        for el in soup.find_all(tag, attrs={attr: True}):
+            m = _re.match(r'^((?:\.\./)*)(clone\.css|clone\.js)(\?v=\w+)?$', el[attr])
+            if m:
+                digest = hashlib.sha1(open(os.path.join(SITE, m.group(2)), 'rb').read()).hexdigest()[:10]
+                el[attr] = f'{m.group(1)}{m.group(2)}?v={digest}'
     # nav logo (desktop + phone nav)
     for nav in soup.find_all('nav'):
         for a in nav.find_all('a', attrs={'data-framer-name': 'Logo'}):
