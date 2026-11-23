@@ -17,6 +17,7 @@ node tools/serve.mjs site 3000      # clean URLs, like the original (/projects/v
 | --- | --- |
 | `site/` | The clone: 6 pages, 170 local assets (fonts + AVIF/WebP images), `clone.css`, `clone.js`, `vendor/lenis` |
 | `ref/` | Captured server-rendered HTML of the reference |
+| `tools/content.py` | CV content (see Content) |
 | `tools/customize.py` | Applies the customisations above |
 | `tools/build.py` | Rebuilds `site/` from `ref/`: strips Framer runtime scripts and badge, localises every asset (manifest with SHA-256 in `site/assets/manifest.json`) |
 | `tools/capture-playwright.cjs` | Playwright adapter writing Replica's `captures.json` evidence contract (Una CLI was not available) |
@@ -33,6 +34,15 @@ node tools/serve.mjs site 3000      # clean URLs, like the original (/projects/v
 * Nav links open real pages instead of scrolling: `projects.html`, `services.html`, `about.html`, `contact.html`
   (generated from the home layout with their own headline and sections). Also used by project pages and "Let's Talk".
 * Mobile hamburger menu works (full-height menu, cross icon), matching the original's behaviour.
+
+## Content
+
+`tools/content.py` (run after `tools/customize.py`) replaces the template copy with Donny Ridwan Setiawan's CV:
+hero, projects (5 case studies with new slugs), experience, process, services, about, highlights, contact, footer,
+titles/meta/canonical URLs. Only CV facts are used; the template photos remain as placeholders for real project images.
+It also restores three SVG icons Framer injects at runtime (`tools/svg-symbols.html`: section-label arrow, stars, play).
+
+Full rebuild: `python3 tools/build.py && python3 tools/customize.py && python3 tools/content.py`
 
 ## Publish
 

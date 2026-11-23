@@ -20,3 +20,9 @@ nav.rc-menu-open { height: 100vh !important; height: 100dvh !important; }
 nav [data-framer-name^="Hamburger"] > div { transition: transform .3s ease, top .3s ease, bottom .3s ease; }
 nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-efdxxd { top: 14px !important; bottom: auto !important; transform: rotate(45deg) !important; }
 nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !important; bottom: auto !important; transform: rotate(-45deg) !important; }
+/* CV content (tools/content.py) */
+.rc-logo-text { display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; }
+.rc-logo-text span { font: 600 13px/1.2 "Inter", "Inter Placeholder", sans-serif; color: #111; letter-spacing: -0.01em; }
+.rc-monogram { display: flex; align-items: center; justify-content: center; background: #111; }
+.rc-monogram span { font: 600 18px/1 "Inter", "Inter Placeholder", sans-serif; color: #fff; }
+.rc-hidden { display: none !important; }
