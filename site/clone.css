@@ -41,10 +41,6 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
   .rc-exp-head, .rc-exp-sub { flex-direction: column; gap: 4px; }
   .rc-exp-dates, .rc-exp-place { white-space: normal; }
 }
-/* Project cards: 4:3 images. On desktop the card widens (less left indent) so the height stays the same
-   as the original 5:4 card: width = (W - 120px) * 16/15  ->  padding-left = 128px - W/15 */
-#projects .framer-ouriok { aspect-ratio: 4 / 3 !important; }
-@media (min-width: 1440px) { #projects .framer-ahh7u { padding-left: calc(128px - 6.6667%) !important; } }
 /* Project cards: whole card (image + caption) is 4:3 on tablet/desktop; phones keep the 4:3 image
    because the two-line caption would squeeze the image to a thin strip */
 @media (min-width: 940px) {
@@ -53,4 +49,16 @@ nav.rc-menu-open [data-framer-name^="Hamburger"] > .framer-17lvu8f { top: 14px !
   #projects .framer-YSbPJ > :first-child [data-framer-name="Hoverable"] { height: 100% !important; }
   #projects .framer-YSbPJ [data-framer-name="Image Wrapper"] { aspect-ratio: auto !important; height: 100% !important; }
   #projects .framer-YSbPJ > :not(:first-child) { flex: none !important; }
+}
+/* Alignment: fixed-width label column so every section heading and its content start on one line (desktop) */
+@media (min-width: 1440px) {
+  .framer-yushdo section div:has(> .framer-DJpEw) { width: 100px !important; flex: none !important; }
+  .framer-yushdo section div:has(> .ssr-variant > div > .framer-DJpEw) { gap: 40px !important; }
+  .framer-yushdo .framer-ahh7u,
+  .framer-yushdo .framer-1ju5amf,
+  .framer-yushdo .framer-a94vmj,
+  .framer-yushdo .framer-zx03sv,
+  .framer-yushdo .framer-1qmbych,
+  .framer-yushdo .framer-1ib2k8o,
+  .framer-yushdo .framer-1tcahwi { padding-left: 140px !important; }
 }
